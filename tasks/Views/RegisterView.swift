@@ -1,0 +1,53 @@
+//
+//  RegisterView.swift
+//  tasks
+//
+//  Created by Ruslan Marshaev on 9/12/24.
+//
+
+import SwiftUI
+
+struct RegisterView: View {
+    
+    @StateObject var viewModel = RegisterViewViewModel()
+    
+    var body: some View {
+        VStack {
+            //Header
+            HeaderView(
+                title: "Register", subtitle:"Start organizing to-dos",
+                angle: -15,
+                background: .orange)
+            
+            Form {
+                TextField("Full Name", text: $viewModel.name)
+                    .textFieldStyle(DefaultTextFieldStyle())
+                    .autocorrectionDisabled()
+                TextField("Email Address", text: $viewModel.email)
+                    .textFieldStyle(DefaultTextFieldStyle())
+                    .autocorrectionDisabled()
+                    .autocapitalization(.none)
+                TextField("Password", text: $viewModel.password)
+                    .textFieldStyle(DefaultTextFieldStyle())
+                
+                TLButton(title: "create account",
+                         background: .green
+                    ) {
+                        viewModel.register()
+                        
+                    
+                    
+                }
+            .padding()
+                
+            }
+            .offset(y:-50)
+            
+            Spacer()
+        }
+    }
+}
+
+#Preview {
+    RegisterView()
+}
